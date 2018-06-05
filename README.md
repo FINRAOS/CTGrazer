@@ -14,10 +14,14 @@ Using **CTGrazer** to port your AWS CloudTrail logs into Splunk has many advanta
 #### Pre-requisites
 | **AWS**       | **Splunk**     | **Python**     |
 | :------------ | :------------- | :------------- |
-| **IAM Role Permissions:** <br/> Invoke *Lambda* and fetch *S3 objects* | **HTTP Event Collector (HEC):** <br/> *Endpoint* and *Authentication Token* | Requests Module |
+| **[Execution Permissions](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html):** <br/> Put Trigger for *S3 Bucket* | **[HTTP Event Collector (HEC)](http://docs.splunk.com/Documentation/Splunk/7.1.1/Data/UsetheHTTPEventCollector) :** <br/> *Authentication Token* | [Requests Module](https://pypi.org/project/requests/2.18.1/) |
 
 #### Splunk Cloud | HEC VPC Configurations
 <p>If you are a <b>Splunk Cloud Customer</b> and plan to use splunk indexers as HEC endpoint, you should NOT set any VPC settings for Lambda to be able to stream data to your indexers. Only setting required here is to open inbound SG's on Splunk Cloud to allow this traffic. If no VPC Settings are enabled, Lambda uses it's own endpoint which has internet access by default to connect to resources outside of your own VPC.
+</p>
+
+#### Splunk Internal | HEC VPC Configurations
+<p>For Internal HEC endpoints, VPC , subnets and SG rules need to be applied.
 </p>
 
 #### Configure, build and install
@@ -51,9 +55,9 @@ CTGrazer uses Requests Module to perform HTTP calls. Download python Requests mo
 |**splunk_debug_sourcetype**|Splunk sourcetype to use when logging debug messages|
  
 ##### 4. Deployment Package
-* Create a zip file to be uploaded as a AWS Lambda Function. You can use Ant builds to achieve this in Jenkins.
-* Upload Zip file as a Lambda Function
+* Create a zip file to be uploaded as a AWS Lambda Function. 
+* Use [Automation](https://docs.aws.amazon.com/lambda/latest/dg/automating-deployment.html) process of your choice for deployment. 
 * Configure S3 Put Trigger for the Cloudtrail Bucket - Event Trigger
 * Configure CloudWatch Event Rule (Eg: 30 min) - Scheduled Trigger
-* Configure applicable VPC, Security Group, Role Settings
+* Configure applicable VPC, Security Group, Role Settings 
 * Set Memory and Timeout limits (256MB , 5 mins)
