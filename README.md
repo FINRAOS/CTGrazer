@@ -1,4 +1,4 @@
-<img src="src/banner.png" alt="CTGrazer" height="20%" align="middle"/>
+<img src="img/banner.png" alt="CTGrazer" height="20%" align="middle"/>
 
 # CTGrazer #
 **CTGrazer** is code you can use to create an *AWS Lambda* Function that will collect all of your *AWS CloudTrail* logs and efficiently send them to your *Splunk HEC (HTTP Event Collector)* server.
@@ -27,7 +27,7 @@ Using **CTGrazer** to port your AWS CloudTrail logs into Splunk has many advanta
 #### Configure, build and install
 ##### 1. Project Structure
  
-<img src="src/ctgrazer-folder-structure.png" alt="CTGrazer Project Structure"/>
+<img src="img/ctgrazer-folder-structure.png" alt="CTGrazer Project Structure"/>
 
 ##### 2. Download Requests Module 
 CTGrazer uses Requests Module to perform HTTP calls. Download python Requests module and copy them under /lib folder.
