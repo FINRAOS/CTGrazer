@@ -12,9 +12,9 @@ Using **CTGrazer** to port your AWS CloudTrail logs into Splunk has many advanta
 * **Cost Effectiveness** Pulling in **400K objects** a month will cost you about the same as a **cheeseburger!**
 
 #### Pre-requisites
-| **AWS**       | **Splunk**     | **Python**     |
-| :------------ | :------------- | :------------- |
-| **[Execution Permissions](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html):** <br/> Put Trigger for *S3 Bucket* | **[HTTP Event Collector (HEC)](http://docs.splunk.com/Documentation/Splunk/7.1.1/Data/UsetheHTTPEventCollector) :** <br/> *Authentication Token* | [Requests Module](https://pypi.org/project/requests/2.18.1/) |
+| **AWS**       | **Splunk**     | **Python**|
+| :------------ | :------------- | :------------- | 
+| **[Execution Permissions](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html):** <br/> Put Trigger for *S3 Bucket* | **[HTTP Event Collector (HEC)](http://docs.splunk.com/Documentation/Splunk/7.1.1/Data/UsetheHTTPEventCollector) :** <br/> *Authentication Token* | *Using Pip* - `pip install requests`<br/>  *If pip not allowed, direct download of all modules -* <ul><li>[Requests](https://files.pythonhosted.org/packages/b0/e1/eab4fc3752e3d240468a8c0b284607899d2fbfb236a56b7377a329aa8d09/requests-2.18.4.tar.gz)</li><ul><li>[Certifi](https://files.pythonhosted.org/packages/4d/9c/46e950a6f4d6b4be571ddcae21e7bc846fcbb88f1de3eff0f6dd0a6be55d/certifi-2018.4.16.tar.gz)</li><li> [Chardet](https://files.pythonhosted.org/packages/fc/bb/a5768c230f9ddb03acc9ef3f0d4a3cf93462473795d18e9535498c8f929d/chardet-3.0.4.tar.gz)</li><li> [Idna](https://files.pythonhosted.org/packages/65/c4/80f97e9c9628f3cac9b98bfca0402ede54e0563b56482e3e6e45c43c4935/idna-2.7.tar.gz)</li><li> [UrlLib](https://files.pythonhosted.org/packages/3c/d2/dc5471622bd200db1cd9319e02e71bc655e9ea27b8e0ce65fc69de0dac15/urllib3-1.23.tar.gz)</li></ul>
 
 #### Splunk Cloud | HEC VPC Configurations
 <p>If you are a <b>Splunk Cloud Customer</b> and plan to use splunk indexers as HEC endpoint, you should NOT set any VPC settings for Lambda to be able to stream data to your indexers. Only setting required here is to open inbound SG's on Splunk Cloud to allow this traffic. If no VPC Settings are enabled, Lambda uses it's own endpoint which has internet access by default to connect to resources outside of your own VPC.
@@ -49,8 +49,8 @@ CTGrazer uses Requests Module to perform HTTP calls. Download python Requests mo
 |**batch_thread_size**|Specify the number threads to be used for event batch|
 |**retry_sleep_time**|Time (in seconds) to sleep. Used when event is triggered but the object isn't there yet. Sleeps for the time specified and retries to get the object from S3|
 |**minutes_to_process**|Time (in minutes) to process events that are older than the below specified minutes|
-|**log_destination**|Time (in minutes) to process events that are older than the below specified minutes|
-|**log_message_prefix**|Specify log message format prefix.|
+|**log_destination**|SPLUNK OR CLOUDWATCH (Default: CLOUDWATCH)|
+|**log_message_prefix**|Sets the format for Lambda log processing events.|
 |**debug**|Turn ON or OFF debugging|
 |**splunk_debug_sourcetype**|Splunk sourcetype to use when logging debug messages|
  
